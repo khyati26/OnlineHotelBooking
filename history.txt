@@ -1,0 +1,500 @@
+   18  git push -u origin main
+   19  kkdbgithub123@
+   20  git push -u origin main
+   21  git push -u origin main
+   22  git remote add origin https://github.com/khyati26/test.git
+   23  git branch -M main
+   24  git push -u origin main
+   25  git push -u origin main
+   26  git push -u origin main
+   27  git push -u https://github.com/khyati26/test.git main
+   28  git push -u https://github.com/khyati26/testProject.git main
+   29  git remote add origin https://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@github.com/khyati26/test.git
+   30  git remote add  https://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@github.com/khyati26/test.git
+   31  git remote add origin https://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@github.com/khyati26/test.git
+   32  git branch -M main
+   33  git push -u origin main
+   34  git push -u https://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@github.com/khyati26/test.git main
+   35  git init
+   36  git status
+   37  git status 
+   38  git add Text1.txt 
+   39  git add Text2.txt 
+   40  git status 
+   41  git add .
+   42  git status 
+   43  git commit -a "Added news file for GIT demo"
+   44  git commit -m "Added news file for GIT demo"
+   45  git log
+   46  git status
+   47  git commit -m "Modified Text2.txt"
+   48  git log
+   49  git add Text2.txt 
+   50  git commit -m "Modified Text2.txt"
+   51  git log
+   52  git status
+   53  git commit -a -m "Mofidied/Dlete files"
+   54  git log
+   55  git diff
+   56  git diff
+   57  git status
+   58  git commit -a -m "Add newfile Text4"[B
+   59  git diff
+   60  git status
+   61  git diff
+   62  git diff
+   63  git status
+   64  git add Text4..txt 
+   65  git diff
+   66  git diff Text4..txt
+   67  git diff
+   68  git diff
+   69  git log
+   70  git diff 8408ebe7ba85e24beeb55accd7bee3277d83f0be 66bc4ea42bcf6c944a98593a19b45ff19d1a01cd
+   71  git diff 66bc4ea42bcf6c944a98593a19b45ff19d1a01cd 8408ebe7ba85e24beeb55accd7bee3277d83f0be
+   72  git config --list
+   73  git config --local user.name "Prashant Patel"
+   74  git config --local user.email "pmp@narola.email"
+   75  git config --list
+   76  git status
+   77  git add .
+   78  git commit -m "Testing"
+   79  git log
+   80  git config --system user.name "PPATEL"
+   81  git config --system user.name "PPATEL"
+   82  git init
+   83  git status
+   84  git status
+   85  git status
+   86  git add .
+   87  git status
+   88  git commit -m "Initial commit"
+   89  git help commit 
+   90  git status
+   91  git remote origin https://github.com/khyati26/HotelBookingWebapp_JAVA.git 
+   92  git remote origin "https://github.com/khyati26/HotelBookingWebapp_JAVA.git" 
+   93  git remote origin https://github.com/khyati26/HotelBookingWebapp_JAVA.git main
+   94  git remote -v
+   95  git config --list
+   96  git remote https://github.com/khyati26/HotelBookingWebapp_JAVA.git main
+   97  git push https://github.com/khyati26/HotelBookingWebapp_JAVA.git 
+   98  git init
+   99  git add APITestProject
+  100  git add JSTLProject
+  101  git add SpringProject
+  102  git add testspring
+  103  git states
+  104  git status
+  105  git commit -m "add java practice projects"
+  106  git branch -M myPracticeProjects
+  107  git push origin myPracticeProjects
+  108  git remote add origin https://github.com/khyati26/HotelBookingWebapp_JAVA.git
+  109  git push origin myPracticeProjects
+  110  cd..
+  111  git init
+  112  git status
+  113  mkdir .gitignor
+  114  git status
+  115  git add .
+  116  git status
+  117  git commit -m "deploy whole project from local to repo"
+  118  git status
+  119  git remote add origin https://github.com/khyati26/HotelBookingWebapp_JAVA.git
+  120  git push origin 
+  121  git push origin main
+  122  git remote add origin https://github.com/khyati26/HotelBookingWebapp_JAVA.git main
+  123  git push origin main
+  124  git status
+  125  git push https://github.com/khyati26/HotelBookingWebapp_JAVA.git main
+  126  git pull origin
+  127  git status
+  128  git push https://github.com/khyati26/HotelBookingWebapp_JAVA.git main
+  129  git pull origin main
+  130  git branch -M main2
+  131  git push https://github.com/khyati26/HotelBookingWebapp_JAVA.git main2
+  132  git fetch origin main
+  133  git status
+  134  git clone https://github.com/khyati26/HotelBookingWebapp_JAVA.git
+  135  git clone https://github.com/khyati26/HotelBookingWebapp_JAVA.git main
+  136  git status
+  137  git status
+  138  git pull origin main
+  139  git push origin main
+  140  git branch -M main
+  141  git push origin main
+  142  git pull origin main
+  143  git push --help
+  144  git push -f origin main
+  145  git status
+  146  git commite -am "add readme"
+  147  git commit -am "add readme"
+  148  git status
+  149  git commit -a -m "add readme"
+  150  git add .
+  151  git commit -m "add readme file"
+  152  git push origin main
+  153  git branch --list
+  154  git branch mybranch
+  155  git branch --list
+  156  git checkout mycheckout
+  157  git 
+  158  git branch -M mybranch
+  159  git checkout master
+  160  git branch -M mybranch
+  161  git branch --list
+  162  git branch -M mybranch1
+  163  git branch --list
+  164  git branch -M master
+  165  git diff
+  166  git diff Text1.txt
+  167  git diff Text1.txt
+  168  git add Text1.txt
+  169  git diff Tex
+  170  git diff Text1.txt
+  171  git diff --combined  Text1.txt
+  172  git diff --cc  Text1.txt
+  173  git diff --cc  Text1.txt
+  174  git init
+  175  mkdir folder1
+  176  git status
+  177  git branch mybranch
+  178  git branch -M mybranch
+  179  git add .
+  180  git status
+  181  git branch --list
+  182  git config origin
+  183  git config --list
+  184  git git rgijgkrjlgknfslkghtjihkrtnbghfikhfihotrlikhnmfgikbhtorieeeeedgdfg
+  185  git 
+  186  git 
+  187  git pull origin
+  188  git branch --list
+  189  git clone origin
+  190  git status
+  191  git commit -am "add sample.txt"
+  192  git status
+  193  git pull origin
+  194  git push -u origin
+  195  git push -u origin main
+  196  git status
+  197  git add .
+  198  git status
+  199  git commit -m "add sample.txt"
+  200  git status
+  201  git push -u origin main
+  202  git pull origin
+  203  git status
+  204  git branch --list
+  205  git pull origin NewBranchByHHP
+  206  git branch --list
+  207  git clone https://github.com/khyati26/OnlineHotelBooking.git
+  208  git branch --list
+  209  git branch NewBranchByHHP
+  210  git b
+  211  git checkout NewBranchByHHP
+  212  git pull origin NewBranchByHHP
+  213  git status
+  214  type hello from java >> README.md
+  215  Type hello from java >> README.md
+  216  echo hello from java >> README.md
+  217  git status
+  218  git add README.md
+  219  git status
+  220  git add OnlineHotelBookinh/
+  221  git add OnlineHotelBookinh/NewBranchByHHP
+  222  git add .
+  223  git commit -m "change in file"
+  224  git push -u origin NewBranchByHHP
+  225  git pull origin NewBranchByHHP
+  226  git status
+  227  git commit -m "change in file "
+  228  git branch --list
+  229  git status
+  230  cd OnlineHotelBooking
+  231  git pull origin main
+  232  git status
+  233  git commit -m "change file"
+  234  git add .
+  235  cd ..
+  236  cd OnlineHotelBooking
+  237  cd ..
+  238  cd OnlineHotelBooking
+  239  git status
+  240  git push origin main
+  241  git push -u origin main
+  242  git push origin main
+  243  git status
+  244  git pull origin main
+  245  git status
+  246  git add .
+  247  git status
+  248  git commite -m "change in file"
+  249  git commite -m "change in file"
+  250  git commit -m "change in file"
+  251  git status
+  252  git push -u origin main
+  253  cd ..
+  254  git status
+  255  git add READMME.md
+  256  git pull origin NewBranchByHHp
+  257  git pull origin NewBranchByHHP
+  258  cd..
+  259  \cd ..
+  260  git init
+  261  git clone https://github.com/khyati26/OnlineHotelBooking.git
+  262  git branch -a
+  263  git branch -r
+  264  git fetch origin
+  265  git diff a4979e9fc088553f16485a2272366e58b1e8e712 6be41ddf6b3f2257bd73094b1e08e93eddf4973a
+  266  git branch -a
+  267  git branch -a
+  268  git branch --list
+  269  git branch -r
+  270  git show-branch 
+  271  git fetch origin
+  272  git branch --list
+  273  git branch -a
+  274  git checkout sklm
+  275  git checkout main
+  276  git status
+  277  git commit -m "changes in file"
+  278  git commit -am "chenges in file"
+  279  git checkout sklm
+  280  git log
+  281  dfdfdgdgfdf
+  282  dfhf
+  283  h
+  284  hf
+  285  h
+  286  fg
+  287  git 
+  288  git pull origin main
+  289  git status
+  290  git pull origin NewBranchByHHP
+  291  git status 
+  292  git add .
+  293  git status 
+  294  git commit -m "change in branch"
+  295  git status 
+  296  git pull origin NewBranchByHHP
+  297  git status
+  298  git push -u origin NewBranchByHHP 
+  299  git diff --color-words
+  300  git diff --color-words newfilehhp.txt
+  301  git diff --color-words newfilehhp.txt
+  302  git diff-highlight newfilehhp.txt
+  303  git diff --cached newfilehhp.txt
+  304  git diff --color-words newfilehhp.txt
+  305  git log
+  306  git diff a4979e9fc088553f16485a2272366e58b1e8e712
+  307  git checkout main
+  308  git checkout NewBranchByHHP
+  309  git checkout newHP
+  310  git checkout sklm
+  311  git checkout newHP
+  312  git branch -a
+  313  git fetch origin
+  314  git branch -a
+  315  git checkout newHP
+  316  git status
+  317  git checkout main
+  318  git status
+  319  git clean -n
+  320  git status
+  321  git checkout newHP
+  322  git checkout main
+  323  git status
+  324  git clean New Text Document.txt
+  325  git clean -n
+  326  git status
+  327  git add .
+  328  git clean -n
+  329  git status
+  330  git restore --staged New\ Text\ Document.txt
+  331  git status
+  332  git clean -n
+  333  git clean -f
+  334  git clone https://github.com/khyati26/OnlineHotelBooking.git
+  335  git status
+  336  git clean -n
+  337  git clean -f
+  338  cd OnlineHotelBooking
+  339  rm -rf OnlineHotelBooking .git
+  340  git status
+  341  git clean -f
+  342  git status
+  343  git clean -f
+  344  rmdir OnlineHotelBooking
+  345  cd ..
+  346  git clean -f
+  347  git status
+  348  rmdir OnlineHotelBooking
+  349  git clone https://github.com/khyati26/OnlineHotelBooking.git
+  350  rmdir OnlineHotelBooking
+  351  git checkout sklm
+  352  git status
+  353  git clean -d
+  354  git clean -D
+  355  git clean -dn
+  356  git clean -df
+  357  git status
+  358  git status
+  359  git clean -xf
+  360  git clean -di
+  361  git clean -di
+  362  git clean -di
+  363  git clean -di
+  364  git clean -di
+  365  git blame .
+  366  git blame 
+  367  git blame -s a.txt
+  368  git rm a.txt
+  369  git status
+  370  git restore --staged a.txt
+  371  git status
+  372  git restore a.txt
+  373  git status
+  374  git fetch --all
+  375  git status
+  376  git pull origin sklm
+  377  git rm OnlineHotelBooking
+  378  git status
+  379  git pull origin sklm
+  380  git status
+  381  git push -u origin sklm
+  382  git add .
+  383  git commit -m "folder deleted"
+  384  git status
+  385  git push -u origin sklm
+  386  git diff sklm
+  387  git push --help
+  388  git init
+  389  git config --list
+  390  git status
+  391  git add .
+  392  git commit -m "Change note1"
+  393  git log
+  394  echo "Second change" > Note1.txt 
+  395  commit -a -m "second change"
+  396  git commit -a -m "second change"
+  397  git log
+  398  git checkout 6a7ec274fdcbf2e6de026ad0c1745ef8135dac9b
+  399  git checkout master 
+  400  git checkout 6a7ec274fdcbf2e6de026ad0c1745ef8135dac9b
+  401  echo "change in commit-6a7ec" > Note1.txt 
+  402  git status
+  403  git commit -a -m "Applying change in 6a7ec"
+  404  git log
+  405  git checkout master 
+  406  git branch new-branch1 ed9f837
+  407  git branch
+  408  git remote add origin https://github.com/khyati26/Demo2.git
+  409  git remote
+  410  git remote -v
+  411  git push origin master 
+  412  git config --list
+  413  git help remote
+  414  git remote -v
+  415  git remote get-url origin 
+  416  git log
+  417  git pull origin master
+  418  git help pull
+  419  git pull origin
+  420  git branch
+  421  git branch -a
+  422  git branch -r
+  423  git branch -a
+  424  git branch
+  425  git pull origin main 
+  426  git fetch origin
+  427  git pull origin main 
+  428  git branch -a
+  429  git fetch origin main:main
+  430  git branch -a
+  431  git pull origin main 
+  432  git checkout main
+  433  git pull origin main 
+  434  git branch new-branch-v1
+  435  git checkout new-branch-v1
+  436  git log
+  437  git checkout main
+  438  git log
+  439  git checkout new-branch-v1
+  440  git commit -a -m "Notes2"
+  441  git status
+  442  git commit -a -m "Notes2"
+  443  git add Note2.txt 
+  444  git commit -m "Notes2"
+  445  git log
+  446  git checkout -b new-branch-v2
+  447  git help checkout
+  448  git log
+  449  git checkout new-branch-v1
+  450  git log
+  451  git commit --amend -m "Chaning commit msg"
+  452  git log
+  453  git add note3.txt 
+  454  git commit --amend -m "Add new file"
+  455  git log
+  456  git status
+  457  git add note3.txt 
+  458  git commit --amend -m "delete note3"
+  459  git log
+  460  git status
+  461  git add .
+  462  git commit -m "add new file note3"
+  463  rm Note3.txt 
+  464  git status
+  465  git add Note3.txt 
+  466  git status
+  467  git restore --staged Note3.txt
+  468  git status
+  469  git restore Note3.txt
+  470  git rm Note3.txt 
+  471  git status
+  472  git restore --staged Note3.txt
+  473  git status
+  474  git restore Note3.txt
+  475  git add Note3.txt 
+  476  git status
+  477  git restore --staged Note3.txt
+  478  git status
+  479  git restore Note3.txt
+  480  git log
+  481  clear
+  482  git log
+  483  git help reset
+  484  git reset HEAD`
+  485* git reset --mixed HEAD~
+  486  git status
+  487  git commit -a -m "Add again note3"
+  488  git add Note3.txt 
+  489  git commit -m "Add again note3"
+  490  git log
+  491  git reset --soft HEAD~
+  492  git status
+  493  git commit -m "New commit for note3"
+  494  git log
+  495  git reset --mixed HEAD~
+  496  git status
+  497  git add Note3.txt 
+  498  git commit -m "New commit for note3"
+  499  git reset --hard HEAD~
+  500  git status
+  501  git log
+  502  git reset --hard HEAD~2
+  503  git log
+  504  git reflog
+  505  git reflog
+  506  git reflog
+  507  git branch
+  508  git checkout master 
+  509  git stash lib1
+  510  git stash
+  511  git checkout master 
+  512  git checkout new-branch-v1 
+  513  git status
+  514  git stash pop
+  515  git status
+  516  history
+  517  history >> history.txt
