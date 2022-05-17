@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.narola.hotelbooking.Hotel.Hotel;
 import com.narola.hotelbooking.Hotel.HotelDAO;
 import com.narola.hotelbooking.Utility.AdminURLConstant;
+import com.narola.hotelbooking.Utility.DAOFactory;
 import com.narola.hotelbooking.Utility.UserURLConstant;
 
 /**
@@ -23,11 +24,13 @@ public class ListRoomServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		IRoomDAO roomDAO = DAOFactory.getInstance().getRoomDAO();
 
 		if (request.getRequestURI().equals(request.getContextPath() + AdminURLConstant.DISPLAYALL_ROOMS_URL)) {
 			
 			int id = Integer.parseInt(request.getParameter("hotelid"));
-			List<Room> roomList = RoomDAO.showHotelWiseRoom(id);
+			List<Room> roomList = roomDAO.showHotelWiseRoom(id);
 
 			Hotel hotel = new Hotel();
 			HttpSession session = request.getSession();
@@ -41,7 +44,7 @@ public class ListRoomServlet extends HttpServlet {
 		else if (request.getRequestURI().equals(request.getContextPath() + AdminURLConstant.VIEW_ROOMPAGE_URL)) {
 
 			int id = Integer.parseInt(request.getParameter("id"));
-			Room room = RoomDAO.viewRoom(id);
+			Room room = roomDAO.viewRoom(id);
 			request.setAttribute("room", room);
 			RequestDispatcher rd = request.getRequestDispatcher("admin/room/ViewRoom.jsp");
 			rd.forward(request, response);
@@ -49,7 +52,7 @@ public class ListRoomServlet extends HttpServlet {
 	    else if (request.getRequestURI().equals(request.getContextPath() + UserURLConstant.ROOM_VIEW_URL)) {
 	    	
 	    	int id = Integer.parseInt(request.getParameter("id"));
-			Room room = RoomDAO.viewRoom(id);
+			Room room = roomDAO.viewRoom(id);
 			request.setAttribute("room", room);
 			RequestDispatcher rd = request.getRequestDispatcher("customerside/Roomview.jsp");
 			rd.forward(request, response);

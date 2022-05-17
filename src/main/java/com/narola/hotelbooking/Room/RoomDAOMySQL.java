@@ -12,47 +12,52 @@ import com.narola.hotelbooking.Hotel.Hotel;
 import com.narola.hotelbooking.Hotel.HotelDAO;
 import com.narola.hotelbooking.Utility.ConnectDB;
 
-public class RoomDAO {
-	public static int inserData(Room room) throws DatabaseException {
-		PreparedStatement ps =null;
+public class RoomDAOMySQL implements IRoomDAO {
+
+	@Override
+	public int inserData(Room room) throws DatabaseException {
+		PreparedStatement ps = null;
 		try {
 			String query = "INSERT INTO "
 					+ "roomtype (name,hotelid,price,qty,inclusions,image,maxcapacity,description) "
 					+ "VALUES (?,?,?,?,?,?,?,?)";
-			 ps = ConnectDB.getConnection().prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+			ps = ConnectDB.getInstance().getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, room.getName());
 			ps.setInt(2, room.getHotelID());
 			ps.setDouble(3, room.getPrice());
-			ps.setInt(4, room.getQty());			
+			ps.setInt(4, room.getQty());
 			ps.setString(5, room.getInclusions());
-			ps.setString(6,room.getImage());
+			ps.setString(6, room.getImage());
 			ps.setInt(7, room.getMaxcapacity());
-			ps.setString(8, room.getDescription());			
+			ps.setString(8, room.getDescription());
 			ps.executeUpdate();
-			ResultSet generatedid=ps.getGeneratedKeys();
-			if(generatedid.next()) {
+			ResultSet generatedid = ps.getGeneratedKeys();
+			if (generatedid.next()) {
 				return generatedid.getInt(1);
 			}
-		} catch (DatabaseException e) {			
+		} catch (DatabaseException e) {
 			throw e;
-		} catch (SQLException e) {						
-			throw new DatabaseException("Exception while inserting room details : "+ e.getMessage(), e);
-		}finally {
+		} catch (SQLException e) {
+			throw new DatabaseException("Exception while inserting room details : " + e.getMessage(), e);
+		} finally {
 			ConnectDB.closeResource(ps);
 		}
 		return 0;
 	}
-	public static List<Room> showHotelWiseRoom(int hotelid) throws DatabaseException{
-		PreparedStatement ps=null;
-		ResultSet rs=null;
+
+	@Override
+	public List<Room> showHotelWiseRoom(int hotelid) throws DatabaseException {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 		List<Room> roomList = new ArrayList<>();
 		try {
-			ps=ConnectDB.getConnection().prepareStatement("SELECT r.*,h.name FROM roomtype r,hotels h where r.hotelid=h.id and r.hotelid = ?");
+			ps = ConnectDB.getInstance().getConnection().prepareStatement(
+					"SELECT r.*,h.name FROM roomtype r,hotels h where r.hotelid=h.id and r.hotelid = ?");
 			ps.setInt(1, hotelid);
-			rs=ps.executeQuery();
+			rs = ps.executeQuery();
 			while (rs.next()) {
 				Room room = new Room();
-				Hotel hotel=HotelDAO.viewHotel(rs.getInt(3));				
+				Hotel hotel = HotelDAO.viewHotel(rs.getInt(3));
 				hotel.setName(rs.getString(11));
 				room.setId(rs.getInt(1));
 				room.setName(rs.getString(2));
@@ -71,23 +76,25 @@ public class RoomDAO {
 			return roomList;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new DatabaseException("Exception while getting hotel wise rooms : "+e.getMessage(),e);
-		}finally {
-			ConnectDB.closeResource(ps,rs);
+			throw new DatabaseException("Exception while getting hotel wise rooms : " + e.getMessage(), e);
+		} finally {
+			ConnectDB.closeResource(ps, rs);
 		}
 	}
-	public static List<Room> showData() throws DatabaseException {
+
+	@Override
+	public List<Room> showData() throws DatabaseException {
 		List<Room> roomList = new ArrayList();
-		Statement s=null;
-		ResultSet rs=null;
+		Statement s = null;
+		ResultSet rs = null;
 		try {
-			
-			s = ConnectDB.getConnection().createStatement();
+
+			s = ConnectDB.getInstance().getConnection().createStatement();
 			rs = s.executeQuery("SELECT r.*,h.name FROM roomtype r,hotels h where r.hotelid=h.id");
 
 			while (rs.next()) {
 				Room room = new Room();
-				Hotel hotel=new Hotel();
+				Hotel hotel = new Hotel();
 				hotel.setName(rs.getString(12));
 //				System.out.println(rs.getString(2));
 				room.setId(rs.getInt(1));
@@ -109,37 +116,38 @@ public class RoomDAO {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			throw new DatabaseException("Exception while getting all rooms : "+e.getMessage(),e);
-		}finally {
-			ConnectDB.closeResource(s,rs);
+			throw new DatabaseException("Exception while getting all rooms : " + e.getMessage(), e);
+		} finally {
+			ConnectDB.closeResource(s, rs);
 		}
 	}
-	
-	public static boolean deleteRoom(int id) throws DatabaseException {
-		PreparedStatement ps=null;
+
+	@Override
+	public boolean deleteRoom(int id) throws DatabaseException {
+		PreparedStatement ps = null;
 		try {
-			ps = ConnectDB.getConnection().prepareStatement("delete from roomtype where id = ? " );
+			ps = ConnectDB.getInstance().getConnection().prepareStatement("delete from roomtype where id = ? ");
 			ps.setInt(1, id);
 			ps.executeUpdate();
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new DatabaseException("Exception while deleting  room : "+e.getMessage(),e);
-		}finally {
+			throw new DatabaseException("Exception while deleting  room : " + e.getMessage(), e);
+		} finally {
 			ConnectDB.closeResource(ps);
 		}
 	}
-	
-	public static Room viewRoom(int id) throws DatabaseException {
-		PreparedStatement ps=null;
-		ResultSet rs=null;
+
+	public Room viewRoom(int id) throws DatabaseException {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 		try {
-			ps = ConnectDB.getConnection().prepareStatement("select * from roomtype where id = ?" );
+			ps = ConnectDB.getInstance().getConnection().prepareStatement("select * from roomtype where id = ?");
 			ps.setInt(1, id);
-			 rs = ps.executeQuery();
-			 Room room =null;
+			rs = ps.executeQuery();
+			Room room = null;
 			if (rs.next()) {
-				room= new Room();
+				room = new Room();
 				room.setId(rs.getInt(1));
 				room.setName(rs.getString(2));
 				room.setHotelID(rs.getInt(3));
@@ -155,21 +163,22 @@ public class RoomDAO {
 			return room;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new DatabaseException("Exception while getting single room : "+e.getMessage(),e);
-		}finally {
-			ConnectDB.closeResource(ps,rs);
+			throw new DatabaseException("Exception while getting single room : " + e.getMessage(), e);
+		} finally {
+			ConnectDB.closeResource(ps, rs);
 		}
 
 	}
-	
-	public static void updateData(Room h) throws DatabaseException {
+
+	@Override
+	public void updateData(Room h) throws DatabaseException {
 
 		String query = "update roomtype set "
 				+ "name = ?,hotelid = ?,price = ?,qty = ?,inclusions = ?,maxcapacity = ?,description = ?,image=? "
 				+ "where id = ?";
-		PreparedStatement ps=null;
+		PreparedStatement ps = null;
 		try {
-			 ps = ConnectDB.getConnection().prepareStatement(query);
+			ps = ConnectDB.getInstance().getConnection().prepareStatement(query);
 			ps.setString(1, h.getName());
 			ps.setInt(2, h.getHotelID());
 			ps.setDouble(3, h.getPrice());
@@ -179,14 +188,17 @@ public class RoomDAO {
 			ps.setString(7, h.getDescription());
 			ps.setString(8, h.getImage());
 			ps.setInt(9, h.getId());
-			ps.executeUpdate() ;
-		} catch (DatabaseException e) {			
+			ps.executeUpdate();
+		} catch (DatabaseException e) {
 			throw e;
-		} catch (SQLException e) {						
-			throw new DatabaseException("Exception while updatingting room details: "+e.getMessage(), e);
-		}finally {
+		} catch (SQLException e) {
+			throw new DatabaseException("Exception while updatingting room details: " + e.getMessage(), e);
+		} finally {
 			ConnectDB.closeResource(ps);
 		}
 	}
-
+	
+	public void testN() {
+		
+	}
 }

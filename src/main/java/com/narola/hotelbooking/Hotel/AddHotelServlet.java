@@ -12,10 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.narola.hotelbooking.Room.IRoomDAO;
 import com.narola.hotelbooking.Room.Room;
-import com.narola.hotelbooking.Room.RoomDAO;
+import com.narola.hotelbooking.Room.RoomDAOMySQL;
 import com.narola.hotelbooking.Utility.AdminURLConstant;
 import com.narola.hotelbooking.Utility.Constant;
+import com.narola.hotelbooking.Utility.DAOFactory;
 
 /**
  * Servlet implementation class AddHotelServlet
@@ -29,6 +31,8 @@ public class AddHotelServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		IRoomDAO roomDAO = DAOFactory.getInstance().getRoomDAO();
 
 		Hotel hotel = new Hotel();
 		hotel.setName(request.getParameter("name"));
@@ -69,7 +73,7 @@ public class AddHotelServlet extends HttpServlet {
 		room.setDescription(request.getParameter("description"));
 		room.setImage("");
 
-		room.setId(RoomDAO.inserData(room));
+		room.setId(roomDAO.inserData(room));
 
 		String hotelDefaultImage = null, roomDefaultImage = null;
 		String hotelfilePath = getServletContext().getInitParameter("imagefolderpath") + "hotels\\" + hotel.getId();
@@ -108,7 +112,7 @@ public class AddHotelServlet extends HttpServlet {
 		HotelDAO.updateData(hotel);
 
 		room.setImage(roomDefaultImage);
-		RoomDAO.updateData(room);
+		roomDAO.updateData(room);
 		response.sendRedirect(request.getContextPath() + AdminURLConstant.DISPLAYALL_HOTELS_URL);
 	}
 

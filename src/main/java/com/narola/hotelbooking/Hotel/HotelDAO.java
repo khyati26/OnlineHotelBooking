@@ -18,7 +18,7 @@ public class HotelDAO {
 			String query = "INSERT INTO "
 					+ "hotels (name,image,stateid,cityid,address,rating,amenitiesAndservices,emailid,cancellationpolicy) "
 					+ "VALUES (?,?,?,?,?,?,?,?,?)";
-			ps = ConnectDB.getConnection().prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+			ps = ConnectDB.getInstance().getConnection().prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, hotel.getName());
 			ps.setString(2, hotel.getImage());
 			ps.setInt(3, hotel.getStateId());
@@ -49,7 +49,7 @@ public class HotelDAO {
 				+ "name = ?,image = ?,stateid = ?,cityid = ?,address = ?,rating = ?,amenitiesAndservices = ?,emailid = ?,cancellationpolicy = ? "
 				+ "where id = ?";
 		try {
-			ps = ConnectDB.getConnection().prepareStatement(query);
+			ps = ConnectDB.getInstance().getConnection().prepareStatement(query);
 			ps.setString(1, hotel.getName());
 			ps.setString(2, hotel.getImage());
 			ps.setInt(3, hotel.getStateId());
@@ -72,7 +72,7 @@ public class HotelDAO {
 	public static void deleteHotel(int id) throws DatabaseException {
 		PreparedStatement ps = null;
 		try {
-			ps = ConnectDB.getConnection().prepareStatement("update hotels set softdelete = 1 where id = ? " );
+			ps = ConnectDB.getInstance().getConnection().prepareStatement("update hotels set softdelete = 1 where id = ? " );
 			ps.setInt(1, id);
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -87,7 +87,7 @@ public class HotelDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			ps = ConnectDB.getConnection().prepareStatement("SELECT h.*,s.statename,c.cityname "
+			ps = ConnectDB.getInstance().getConnection().prepareStatement("SELECT h.*,s.statename,c.cityname "
 					+ "FROM mydb.hotels h,mydb.city c , mydb.state s "
 					+ "where h.stateid=s.id and h.cityid=c.id and h.id = ? ");
 			ps.setInt(1, id);
@@ -124,7 +124,7 @@ public class HotelDAO {
 		Statement st=null;
 		ResultSet rs=null;
 		try {			
-			st = ConnectDB.getConnection().createStatement();
+			st = ConnectDB.getInstance().getConnection().createStatement();
 			rs = st.executeQuery("SELECT h.*,s.statename,c.cityname FROM mydb.hotels h,mydb.city c , mydb.state s where h.stateid=s.id and h.cityid=c.id and softdelete = 0;");
 			while (rs.next()) {
 				Hotel hotel = new Hotel();
@@ -160,7 +160,7 @@ public class HotelDAO {
 		ResultSet rs=null;
 		try {
 			
-			st = ConnectDB.getConnection().createStatement();
+			st = ConnectDB.getInstance().getConnection().createStatement();
 			rs = st.executeQuery("SELECT id,name FROM hotels where softdelete = 0");
 
 			while (rs.next()) {

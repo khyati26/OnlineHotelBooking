@@ -15,7 +15,7 @@ public class UserDAO {
 		PreparedStatement ps = null;
 		ResultSet rs=null;
 		try {
-			ps = ConnectDB.getConnection().prepareStatement("SELECT count(*) from user where email = ?  and password = ? and usertype = "+ 0);
+			ps = ConnectDB.getInstance().getConnection().prepareStatement("SELECT count(*) from user where email = ?  and password = ? and usertype = "+ 0);
 			ps.setString(1, email1);
 			ps.setString(2, pass);
 			rs = ps.executeQuery();
@@ -35,7 +35,7 @@ public class UserDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null ;
 		try {
-			ps = ConnectDB.getConnection().prepareStatement("SELECT count(*) from user where email = ? and password = ? and usertype = "+ 1);
+			ps = ConnectDB.getInstance().getConnection().prepareStatement("SELECT count(*) from user where email = ? and password = ? and usertype = "+ 1);
 			ps.setString(1, email1);
 			ps.setString(2, pass);
 			rs = ps.executeQuery();
@@ -58,7 +58,7 @@ public class UserDAO {
 			String query = "INSERT INTO "
 					+ "user (email,password,customerid,usertype) "
 					+ "VALUES (?,?,?,?)";
-			ps = ConnectDB.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			ps = ConnectDB.getInstance().getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, user.getEmail());
 			ps.setString(2, user.getPassword());
 			ps.setInt(3, user.getCustomerId());

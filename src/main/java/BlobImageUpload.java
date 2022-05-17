@@ -29,7 +29,7 @@ public class BlobImageUpload extends HttpServlet {
 
 		PreparedStatement ps;
 		try {
-			ps = ConnectDB.getConnection().prepareStatement("select * from test where id=18");
+			ps = ConnectDB.getInstance().getConnection().prepareStatement("select * from test where id=18");
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				Blob blob = rs.getBlob(3);

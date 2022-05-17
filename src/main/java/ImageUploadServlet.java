@@ -84,7 +84,7 @@ public class ImageUploadServlet extends HttpServlet {
 //		}
 		PreparedStatement ps;
 		try {
-			ps = ConnectDB.getConnection().prepareStatement("insert into test (imagepath,image) values(?,?)");
+			ps = ConnectDB.getInstance().getConnection().prepareStatement("insert into test (imagepath,image) values(?,?)");
 			ps.setString(1, newFile.getName().toString());
 			ps.setBlob(2, inputStream);
 			ps.executeUpdate();

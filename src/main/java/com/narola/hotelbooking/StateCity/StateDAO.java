@@ -16,7 +16,7 @@ public class StateDAO {
 			ResultSet rs=null;
 			List<State> stateList = new ArrayList<>();
 			try {
-				st=ConnectDB.getConnection().createStatement();
+				st=ConnectDB.getInstance().getConnection().createStatement();
 				rs=st.executeQuery("SELECT * FROM state");
 				while (rs.next()) {
 					State state = new State();		

@@ -15,7 +15,7 @@ public class CustomerDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			ps = ConnectDB.getConnection().prepareStatement("SELECT * from customer where id = ?");
+			ps = ConnectDB.getInstance().getConnection().prepareStatement("SELECT * from customer where id = ?");
 			ps.setInt(1, id);
 			
 			rs = ps.executeQuery();
@@ -42,7 +42,7 @@ public class CustomerDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			ps = ConnectDB.getConnection().prepareStatement("SELECT * from customer where email = ?");
+			ps = ConnectDB.getInstance().getConnection().prepareStatement("SELECT * from customer where email = ?");
 			ps.setString(1, email1);
 			rs = ps.executeQuery();
 			Customer c = null;
@@ -68,7 +68,7 @@ public class CustomerDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			ps = ConnectDB.getConnection().prepareStatement("SELECT count(*) from customer where email = ?");
+			ps = ConnectDB.getInstance().getConnection().prepareStatement("SELECT count(*) from customer where email = ?");
 			ps.setString(1, email1);
 			rs = ps.executeQuery();
 			if (rs.next()) {
@@ -89,7 +89,7 @@ public class CustomerDAO {
 		PreparedStatement ps = null;
 		try {
 			String query = "INSERT INTO " + "customer (firstname,lastname,email,mobile) " + "VALUES (?,?,?,?)";
-			ps = ConnectDB.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			ps = ConnectDB.getInstance().getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, h.getFirstName());
 			ps.setString(2, h.getLastName());
 			ps.setString(3, h.getEmail());

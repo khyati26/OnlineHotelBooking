@@ -17,8 +17,11 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.narola.hotelbooking.Hotel.HotelDAO;
 import com.narola.hotelbooking.Hotel.SearchHotel;
+import com.narola.hotelbooking.Room.IRoomDAO;
 import com.narola.hotelbooking.Room.Room;
-import com.narola.hotelbooking.Room.RoomDAO;
+import com.narola.hotelbooking.Room.RoomDAOMySQL;
+import com.narola.hotelbooking.Room.RoomDAOPostgres;
+import com.narola.hotelbooking.Utility.DAOFactory;
 
 /**
  * Servlet implementation class BookingServlet
@@ -34,6 +37,8 @@ public class BookingDetailsServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		IRoomDAO roomDAO = DAOFactory.getInstance().getRoomDAO();
 	
 		HttpSession session = request.getSession();
 			
@@ -43,7 +48,7 @@ public class BookingDetailsServlet extends HttpServlet {
 		List<Room> roomList = new ArrayList<>();
 		
 		for(Entry<Double, String> pair : s.entrySet()) {
-			Room room = RoomDAO.viewRoom(pair.getKey().intValue());
+			Room room = roomDAO.viewRoom(pair.getKey().intValue());
 			room.setAvailableroom(Integer.parseInt(pair.getValue()));
 			roomList.add(room);			
 //			System.out.println(pair.getKey() + "  "+ pair.getValue());			

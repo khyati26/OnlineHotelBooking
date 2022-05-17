@@ -16,7 +16,7 @@ public class CancellationRulesDAO {
 		PreparedStatement ps = null;
 		try {
 			String query = "INSERT INTO " + "cancelletionrules (hotelid,hours,refund) " + "VALUES (?,?,?)";
-			ps = ConnectDB.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			ps = ConnectDB.getInstance().getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, cancellationrule.getHotelid());
 			ps.setInt(2, cancellationrule.getHours());
 			ps.setInt(3, cancellationrule.getRefundpercentsge());
@@ -40,7 +40,7 @@ public class CancellationRulesDAO {
 		PreparedStatement ps = null;
 		String query = "update cancelletionrules set hotelid=?,hours=?,refund=? " + "where id = ?";
 		try {
-			ps = ConnectDB.getConnection().prepareStatement(query);
+			ps = ConnectDB.getInstance().getConnection().prepareStatement(query);
 			ps.setInt(1, cancellationrule.getHotelid());
 			ps.setInt(2, cancellationrule.getHours());
 			ps.setInt(3, cancellationrule.getRefundpercentsge());
@@ -63,7 +63,7 @@ public class CancellationRulesDAO {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		try {
-			ps = ConnectDB.getConnection().prepareStatement("SELECT * FROM cancelletionrules where hotelid = ?");
+			ps = ConnectDB.getInstance().getConnection().prepareStatement("SELECT * FROM cancelletionrules where hotelid = ?");
 			ps.setInt(1, hotelId);
 			 rs = ps.executeQuery();
 			while (rs.next()) {
@@ -87,7 +87,7 @@ public class CancellationRulesDAO {
 	public static boolean deleteData(int id) throws DatabaseException {
 		PreparedStatement ps=null;
 		try {
-			ps = ConnectDB.getConnection().prepareStatement("delete from  cancelletionrules where id = ? ");
+			ps = ConnectDB.getInstance().getConnection().prepareStatement("delete from  cancelletionrules where id = ? ");
 			ps.setInt(1, id);
 			 ps.executeUpdate() ;
 			return true;
@@ -102,7 +102,7 @@ public class CancellationRulesDAO {
 	public static boolean deleteHotelWiseData(int hotelid) {
 		PreparedStatement ps=null;
 		try {
-			ps = ConnectDB.getConnection()
+			ps = ConnectDB.getInstance().getConnection()
 					.prepareStatement("delete from  cancelletionrules where hotelid = ? ");
 			ps.setInt(1, hotelid);
 			ps.executeUpdate() ;

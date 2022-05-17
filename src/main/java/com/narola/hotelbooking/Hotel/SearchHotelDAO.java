@@ -35,8 +35,8 @@ public class SearchHotelDAO {
 		LocalDate dateEnd = LocalDate.parse(searchHotel.getCheckOut());
 
 		try {
-			ConnectDB.getConnection().setAutoCommit(false);
-			ps = ConnectDB.getConnection().prepareStatement(query );
+			ConnectDB.getInstance().getConnection().setAutoCommit(false);
+			ps = ConnectDB.getInstance().getConnection().prepareStatement(query );
 			ps.setInt(1, hotelid);
 			int totalparsons = searchHotel.getAdult() + searchHotel.getChildren();
 			if ((int) totalparsons % searchHotel.getRoom() == 0) {
@@ -74,7 +74,7 @@ public class SearchHotelDAO {
 					+ "mydb.booking b inner join mydb.bookingroom br on b.id=br.bookingid  \r\n"
 					+ "inner join mydb.roomtype r on br.roomid = r.id\r\n"
 					+ "and b.hotelid = ? and b.checkin <= ? and b.checkout >= ? group by br.roomid having sum(br.roomqty) < r.qty;\r\n";
-		    ps = ConnectDB.getConnection().prepareStatement(query2);
+		    ps = ConnectDB.getInstance().getConnection().prepareStatement(query2);
 			ps.setInt(1, hotelid);
 			 
 			
@@ -107,7 +107,7 @@ public class SearchHotelDAO {
 				String query1 = "SELECT r.* from\r\n"
 						+ " mydb.booking b , mydb.roomtype r , mydb.bookingroom br where b.id=br.bookingid and r.id=br.roomid \r\n"
 						+ " and b.hotelid = ? and b.checkin not between ? and ? and b.checkout not between ? and ? group by br.roomid ; \r\n";
-				ps = ConnectDB.getConnection().prepareStatement(query1);
+				ps = ConnectDB.getInstance().getConnection().prepareStatement(query1);
 				ps.setInt(1, hotelid);
 				ps.setString(2, searchHotel.getCheckIn());
 				ps.setString(3, dateEnd.minusDays(1).toString());
@@ -160,7 +160,7 @@ public class SearchHotelDAO {
 				String query1 = "SELECT r.* from \r\n"
 						+ "mydb.booking b , mydb.roomtype r , mydb.bookingroom br where b.id=br.bookingid and r.id=br.roomid  \r\n"
 						+ "and b.hotelid = ? and b.checkin != ? and b.checkout != ? group by br.roomid ;\r\n";
-				ps = ConnectDB.getConnection().prepareStatement(query1);
+				ps = ConnectDB.getInstance().getConnection().prepareStatement(query1);
 				ps.setInt(1, hotelid);
 				ps.setString(2, searchHotel.getCheckIn());
 				ps.setString(3, searchHotel.getCheckOut());
@@ -184,16 +184,16 @@ public class SearchHotelDAO {
 				}				
 			}
 
-			ConnectDB.getConnection().commit();
+			ConnectDB.getInstance().getConnection().commit();
 //			return roomList;
 			return roomSet;
 		} catch (SQLException e) {
-			ConnectDB.getConnection().rollback();
+			ConnectDB.getInstance().getConnection().rollback();
 			throw new DatabaseException("Exception while getting available rooms in hotel: " + e.getMessage(), e);
 
 		} finally {
 			ConnectDB.closeResource(ps, rs);
-			ConnectDB.getConnection().setAutoCommit(true);
+			ConnectDB.getInstance().getConnection().setAutoCommit(true);
 			
 		}
 	}
@@ -204,7 +204,7 @@ public class SearchHotelDAO {
 		List<Hotel> hotelList = new ArrayList<>();
 		String query1 = "SELECT * FROM mydb.hotels  r where cityId = ? and softdelete = 0 ";
 		try {
-			ps = ConnectDB.getConnection().prepareStatement(query1);
+			ps = ConnectDB.getInstance().getConnection().prepareStatement(query1);
 			ps.setInt(1,cityid);
 			rs = ps.executeQuery();
 			while (rs.next()) {
@@ -236,7 +236,7 @@ public class SearchHotelDAO {
 		String query1 = "SELECT h.* FROM mydb.hotels h , mydb.city c , mydb.roomtype r where h.cityid = c.id and h.id=r.hotelid and c.cityname = ? and softdelete = 0 and r.maxcapacity <= ? \r\n"
 				+ " group by h.id order by r.maxcapacity desc";
 		try {
-			ps = ConnectDB.getConnection().prepareStatement(query1);
+			ps = ConnectDB.getInstance().getConnection().prepareStatement(query1);
 			ps.setString(1, searchhotel.getCity());
 			int totalparsons = searchhotel.getAdult() + searchhotel.getChildren();
 //			System.out.println((int) (searchhotel.getAdult() + searchhotel.getChildren()) % searchhotel.getRoom());

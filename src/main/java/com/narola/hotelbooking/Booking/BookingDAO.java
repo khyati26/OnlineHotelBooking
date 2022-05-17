@@ -48,7 +48,7 @@ public class BookingDAO {
 		ResultSet rs = null;
 
 		try {
-			ps = ConnectDB.getConnection().prepareStatement(Query);
+			ps = ConnectDB.getInstance().getConnection().prepareStatement(Query);
 //			ps.setString(1, checkin);
 //			ps.setString(2, checkout);
 			rs = ps.executeQuery();
@@ -93,7 +93,7 @@ public class BookingDAO {
 	}
 
 	public static int createBooking(Booking book, List<Room> roomList) {
-		Connection connection = ConnectDB.getConnection();
+		Connection connection = ConnectDB.getInstance().getConnection();
 		try {
 			connection.setAutoCommit(false);
 			int bookingid = inserData(book, connection);
@@ -126,7 +126,7 @@ public class BookingDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			ps = ConnectDB.getConnection().prepareStatement("select * from booking where id = ?");
+			ps = ConnectDB.getInstance().getConnection().prepareStatement("select * from booking where id = ?");
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
 			Booking booking = null;
@@ -162,7 +162,7 @@ public class BookingDAO {
 
 	public static int inserData(Booking book, Connection connection) throws DatabaseException {
 		if (connection == null) {
-			connection = ConnectDB.getConnection();
+			connection = ConnectDB.getInstance().getConnection();
 		}
 		PreparedStatement ps = null;
 		try {
@@ -203,7 +203,7 @@ public class BookingDAO {
 				+ "where id = ?";
 		PreparedStatement ps = null;
 		try {
-			ps = ConnectDB.getConnection().prepareStatement(query);
+			ps = ConnectDB.getInstance().getConnection().prepareStatement(query);
 			ps.setInt(1, booking.getCustomerId());
 			ps.setInt(2, booking.getHotelId());
 			ps.setInt(3, booking.getTotalRoomQty());
@@ -236,7 +236,7 @@ public class BookingDAO {
 		ResultSet rs = null;
 		try {
 
-			s = ConnectDB.getConnection().createStatement();
+			s = ConnectDB.getInstance().getConnection().createStatement();
 			rs = s.executeQuery("select b.*, c.firstname , c.lastname  \r\n"
 					+ "from mydb.booking b , mydb.customer c  , mydb.hotels h\r\n"
 					+ "where  b.customerid = c.id and b.hotelid = h.id\r\n" + "group by b.id order by b.id;");

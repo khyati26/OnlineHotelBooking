@@ -2,21 +2,43 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>OnlineHotelBookingWebap</display-name>
   <context-param>
-    <param-name>dbname</param-name>
+    <param-name>MYSQL_dbname</param-name>
     <param-value>mydb</param-value>
   </context-param>
   <context-param>
-    <param-name>dburl</param-name>
+    <param-name>MYSQL_dburl</param-name>
     <param-value>jdbc:mysql://localhost:3306</param-value>
   </context-param>
   <context-param>
-    <param-name>username</param-name>
+    <param-name>MYSQL_username</param-name>
     <param-value>root</param-value>
   </context-param>
   <context-param>
-    <param-name>password</param-name>
+    <param-name>MYSQL_password</param-name>
     <param-value>root</param-value>
   </context-param>
+  <context-param>
+    <param-name>ORACLE_dbname</param-name>
+    <param-value>mydb</param-value>
+  </context-param>
+  <context-param>
+    <param-name>ORACLE_dburl</param-name>
+    <param-value>jdbc:mysql://localhost:3306</param-value>
+  </context-param>
+  <context-param>
+    <param-name>ORACLE_username</param-name>
+    <param-value>root</param-value>
+  </context-param>
+  <context-param>
+    <param-name>ORACLE_password</param-name>
+    <param-value>root</param-value>
+  </context-param>
+ 
+  <context-param>
+    <param-name>DB-IN-USE</param-name>
+    <param-value>ORACLE</param-value>
+  </context-param>
+  
   <context-param>
     <param-name>imagefolderpath</param-name>
     <param-value>C:\Users\brkhyati\eclipse-workspace\OnlineHotelBookingWebap\src\main\webapp\images\</param-value>

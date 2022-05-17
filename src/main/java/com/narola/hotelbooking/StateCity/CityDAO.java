@@ -18,7 +18,7 @@ public class CityDAO {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		try {
-			ps = ConnectDB.getConnection().prepareStatement("select * from city where id = ?" );
+			ps = ConnectDB.getInstance().getConnection().prepareStatement("select * from city where id = ?" );
 			ps.setInt(1, id);
 			 rs = ps.executeQuery();
 			 City city =null;
@@ -48,7 +48,7 @@ public class CityDAO {
 				+ "where id = ?";
 		PreparedStatement ps=null;
 		try {
-			 ps = ConnectDB.getConnection().prepareStatement(query);
+			 ps = ConnectDB.getInstance().getConnection().prepareStatement(query);
 			ps.setString(1, city.getCityName());
 			ps.setInt(2, city.getStateId());
 			ps.setString(3, city.getImage());
@@ -68,7 +68,7 @@ public class CityDAO {
 	public static boolean deleteCity(int id) throws DatabaseException {
 		PreparedStatement ps=null;
 		try {
-			ps = ConnectDB.getConnection().prepareStatement("delete from city where id = ? " );
+			ps = ConnectDB.getInstance().getConnection().prepareStatement("delete from city where id = ? " );
 			ps.setInt(1, id);
 			ps.executeUpdate();
 			return true;
@@ -86,7 +86,7 @@ public class CityDAO {
 			String query = "INSERT INTO "
 					+ "city (stateid,cityname,popular,image)"
 					+ "VALUES (?,?,?,?)";
-			ps = ConnectDB.getConnection().prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+			ps = ConnectDB.getInstance().getConnection().prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, city.getStateId());
 			ps.setString(2, city.getCityName());
 			ps.setInt(3, city.getPopular());
@@ -109,7 +109,7 @@ public class CityDAO {
 		PreparedStatement ps = null;
 		String query = "update city set " + "popular = " + 1 + " where id = ? ";
 		try {
-			ps = ConnectDB.getConnection().prepareStatement(query);
+			ps = ConnectDB.getInstance().getConnection().prepareStatement(query);
 			ps.setInt(1, cityid);
 			ps.executeUpdate();
 			return true;
@@ -125,7 +125,7 @@ public class CityDAO {
 		PreparedStatement ps = null;
 		String query = "update city set " + "popular = " + 0 + " where id = ? ";
 		try {
-			ps = ConnectDB.getConnection().prepareStatement(query);
+			ps = ConnectDB.getInstance().getConnection().prepareStatement(query);
 			ps.setInt(1, cityid);
 			ps.executeUpdate();
 			return true;
@@ -142,7 +142,7 @@ public class CityDAO {
 		ResultSet rs = null;
 		List<City> cityList = new ArrayList<>();
 		try {
-			st = ConnectDB.getConnection().createStatement();
+			st = ConnectDB.getInstance().getConnection().createStatement();
 			rs = st.executeQuery("SELECT c.*,s.statename FROM city c,state s where c.stateid=s.id ");
 			while (rs.next()) {
 				City city = new City();
@@ -170,7 +170,7 @@ public class CityDAO {
 		List<City> cityList = new ArrayList<>();
 		try {
 			// @formatter:off
-			ps = ConnectDB.getConnection().prepareStatement(
+			ps = ConnectDB.getInstance().getConnection().prepareStatement(
 					"SELECT c.*,s.statename FROM city c,state s "
 					+ "where c.stateid=s.id and c.stateid=?");
 			// @formatter:on
@@ -201,7 +201,7 @@ public class CityDAO {
 		String query="select c.*,s.statename from mydb.state s, mydb.city c where s.id=c.stateid and c.popular = 1";
 		List<City> cityList = new ArrayList<>();
 		try {
-			st = ConnectDB.getConnection().createStatement();
+			st = ConnectDB.getInstance().getConnection().createStatement();
 			rs = st.executeQuery(query);
 			while (rs.next()) {
 				City city = new City();

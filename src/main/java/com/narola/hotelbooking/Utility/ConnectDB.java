@@ -10,17 +10,30 @@ import com.narola.hotelbooking.Exception.DatabaseException;
 
 public class ConnectDB {
 
-	static Connection connection = null;
-	static String dbname = null;
-	static String url = null;
-	static String username = null;
-	static String password = null;
+	private static ConnectDB connectDB = null;
 
-	public static void initializeConnection() throws DatabaseException {
+	private Connection connection = null;
+	private String dbname = null;
+	private String url = null;
+	private String username = null;
+	private String password = null;
+
+	private ConnectDB() {
+
+	}
+
+	public static ConnectDB getInstance() {
+		if (connectDB == null) {
+			connectDB = new ConnectDB();
+		}
+		return connectDB;
+	}
+
+	public void initializeConnection() throws DatabaseException {
 		getConnection();
 	}
 
-	public static Connection getConnection() throws DatabaseException {
+	public Connection getConnection() throws DatabaseException {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			if (connection == null || connection.isClosed()) {
@@ -33,7 +46,7 @@ public class ConnectDB {
 		}
 		return connection;
 	}
-	
+
 	public static void closeResource(Statement statement) {
 		closeResource(statement, null);
 	}
@@ -55,35 +68,39 @@ public class ConnectDB {
 		}
 	}
 
-	public static String getDbname() {
+	public String getDbname() {
 		return dbname;
 	}
 
-	public static void setDbname(String dbname) {
-		ConnectDB.dbname = dbname;
+	public void setDbname(String dbname) {
+		this.dbname = dbname;
 	}
 
-	public static String getUrl() {
+	public String getUrl() {
 		return url;
 	}
 
-	public static void setUrl(String url) {
-		ConnectDB.url = url;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
-	public static String getUsername() {
+	public String getUsername() {
 		return username;
 	}
 
-	public static void setUsername(String username) {
-		ConnectDB.username = username;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public static String getPassword() {
+	public String getPassword() {
 		return password;
 	}
 
-	public static void setPassword(String password) {
-		ConnectDB.password = password;
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setConnection(Connection connection) {
+		this.connection = connection;
 	}
 }

@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.narola.hotelbooking.Exception.DatabaseException;
+import com.narola.hotelbooking.Room.IRoomDAO;
 import com.narola.hotelbooking.Room.Room;
-import com.narola.hotelbooking.Room.RoomDAO;
+import com.narola.hotelbooking.Room.RoomDAOMySQL;
 import com.narola.hotelbooking.Utility.ConnectDB;
+import com.narola.hotelbooking.Utility.DAOFactory;
 
 public class BookingRoomDAO {
 	
@@ -21,7 +23,7 @@ public class BookingRoomDAO {
 	}
 	public static int inserData(int bookingid,int roomid,int roomqty,Connection connection) throws DatabaseException {
 		if(connection == null) {
-			connection = ConnectDB.getConnection();
+			connection = ConnectDB.getInstance().getConnection();
 		}
 		PreparedStatement ps =null;
 		try {
@@ -49,17 +51,18 @@ public class BookingRoomDAO {
 	}
 	
 	public static List<Room> getBookedRooms(int bookingid){
+		IRoomDAO roomDAO = DAOFactory.getInstance().getRoomDAO();
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		List<Room> roomList = null;
 		try {
-			ps = ConnectDB.getConnection().prepareStatement("select roomid,roomqty from bookingroom where bookingid = ?" );
+			ps = ConnectDB.getInstance().getConnection().prepareStatement("select roomid,roomqty from bookingroom where bookingid = ?" );
 			ps.setInt(1, bookingid);
 			 rs = ps.executeQuery();
 			roomList = new ArrayList();
 			while (rs.next()) {
 				Room room =new Room();
-				room = RoomDAO.viewRoom(rs.getInt(1));
+				room = roomDAO.viewRoom(rs.getInt(1));
 				room.setQty(rs.getInt(2));
 				roomList.add(room);
 			}
