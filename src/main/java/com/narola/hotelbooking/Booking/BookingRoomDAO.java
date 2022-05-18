@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.narola.hotelbooking.Exception.DatabaseException;
-import com.narola.hotelbooking.Room.IRoomDAO;
-import com.narola.hotelbooking.Room.Room;
-import com.narola.hotelbooking.Room.RoomDAOMySQL;
+import com.narola.hotelbooking.Room.dao.IRoomDAO;
+import com.narola.hotelbooking.Room.dao.RoomDAOMySQL;
+import com.narola.hotelbooking.Room.model.Room;
 import com.narola.hotelbooking.Utility.ConnectDB;
 import com.narola.hotelbooking.Utility.DAOFactory;
 

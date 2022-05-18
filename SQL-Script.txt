@@ -1,0 +1,146 @@
+CREATE TABLE `state` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `statename` varchar(45) NOT NULL,
+  `createdon` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updateon` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+======================================================================================
+CREATE TABLE `city` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `stateid` int(11) NOT NULL,
+  `cityname` varchar(45) NOT NULL,
+  `popular` int(11) DEFAULT '0',
+  `image` varchar(50) DEFAULT NULL,
+  `createdon` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updatedon` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `stateid_idx` (`stateid`),
+  CONSTRAINT `stateid` FOREIGN KEY (`stateid`) REFERENCES `state` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COMMENT='										';
+
+========================================================================================
+CREATE TABLE `customer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(100) NOT NULL,
+  `lastname` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `mobile` varchar(10) DEFAULT NULL,
+  `createdon` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updatedon` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+
+========================================================================================
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(500) NOT NULL,
+  `customerid` int(11) NOT NULL,
+  `usertype` int(11) NOT NULL DEFAULT '1',
+  `createdon` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updatedon` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  KEY `customerid_idx` (`customerid`),
+  CONSTRAINT `customerid` FOREIGN KEY (`customerid`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+
+
+========================================================================================
+CREATE TABLE `hotels` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `image` varchar(500) DEFAULT NULL,
+  `stateid` int(11) NOT NULL,
+  `cityid` int(11) NOT NULL,
+  `address` varchar(500) NOT NULL,
+  `rating` int(11) DEFAULT NULL,
+  `amenitiesAndservices` varchar(200) NOT NULL,
+  `emailid` varchar(45) NOT NULL,
+  `cancellationpolicy` text NOT NULL,
+  `createdon` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updatedon` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `softdelete` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `cityid_idx` (`cityid`),
+  KEY `stateid_idx` (`stateid`),
+  KEY `cityhotel_idx` (`cityid`,`stateid`),
+  CONSTRAINT `cityhotel` FOREIGN KEY (`cityid`) REFERENCES `city` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `statehotel` FOREIGN KEY (`stateid`) REFERENCES `state` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=621 DEFAULT CHARSET=utf8;
+
+========================================================================================
+CREATE TABLE `cancelletionrules` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `hotelid` int(11) NOT NULL,
+  `hours` int(11) NOT NULL,
+  `refund` int(11) NOT NULL,
+  `createdon` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updatedon` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `hotelid_idx` (`hotelid`),
+  CONSTRAINT `hotelid2` FOREIGN KEY (`hotelid`) REFERENCES `hotels` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+
+========================================================================================
+CREATE TABLE `roomtype` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) NOT NULL,
+  `hotelid` int(11) NOT NULL,
+  `price` double NOT NULL,
+  `qty` int(11) NOT NULL,
+  `inclusions` varchar(200) DEFAULT NULL,
+  `image` varchar(200) DEFAULT NULL,
+  `maxcapacity` int(11) NOT NULL,
+  `description` varchar(300) DEFAULT NULL,
+  `createdon` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updatedon` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `hotelid_idx` (`hotelid`),
+  CONSTRAINT `hotelid` FOREIGN KEY (`hotelid`) REFERENCES `hotels` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
+
+========================================================================================
+CREATE TABLE `booking` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `customerid` int(11) NOT NULL,
+  `hotelid` int(11) NOT NULL,
+  `roomqty` int(11) NOT NULL,
+  `adults` int(11) NOT NULL,
+  `children` int(11) DEFAULT NULL,
+  `totalamount` double NOT NULL,
+  `checkin` date NOT NULL,
+  `checkout` date NOT NULL,
+  `payment_mode` varchar(100) DEFAULT NULL,
+  `payment_status` varchar(45) DEFAULT NULL,
+  `booking_status` varchar(45) DEFAULT NULL,
+  `razorpaymentid` varchar(45) DEFAULT NULL,
+  `razororderid` varchar(45) DEFAULT NULL,
+  `failedreason` varchar(200) DEFAULT NULL,
+  `errorjson` text,
+  `createdon` datetime DEFAULT CURRENT_TIMESTAMP,
+  `undatedon` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `booking_customerid_idx` (`customerid`),
+  KEY `booking_hotelid_idx` (`hotelid`),
+  CONSTRAINT `booking_customerid` FOREIGN KEY (`customerid`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `booking_hotelid` FOREIGN KEY (`hotelid`) REFERENCES `hotels` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
+
+========================================================================================
+CREATE TABLE `bookingroom` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `bookingid` int(11) NOT NULL,
+  `roomid` int(11) NOT NULL,
+  `roomqty` int(11) NOT NULL,
+  `createdon` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updatedon` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `bookingroom_bookingid_idx` (`bookingid`),
+  KEY `bookingroom_roomid_idx` (`roomid`),
+  CONSTRAINT `bookingroom_bookingid` FOREIGN KEY (`bookingid`) REFERENCES `booking` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `bookingroom_roomid` FOREIGN KEY (`roomid`) REFERENCES `roomtype` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;

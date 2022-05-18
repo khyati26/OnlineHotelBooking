@@ -13,12 +13,12 @@ import java.util.Set;
 
 import com.narola.hotelbooking.Exception.DatabaseException;
 import com.narola.hotelbooking.Hotel.Hotel;
-import com.narola.hotelbooking.Room.Room;
+import com.narola.hotelbooking.Room.model.Room;
 import com.narola.hotelbooking.Utility.ConnectDB;
 
 public class SearchHotelDAO {
 
-	public static Set<Room> getAvailableRooms(SearchHotel searchHotel, int hotelid)
+	public static Set<Room> getAvailableRooms(SearchHotelCriteria searchHotel, int hotelid)
 			throws DatabaseException, SQLException {
 
 		PreparedStatement ps = null;
@@ -229,7 +229,7 @@ public class SearchHotelDAO {
 		}
 	}
 	
-	public static List<Hotel> getCityWiseHotels(SearchHotel searchhotel) throws DatabaseException {
+	public static List<Hotel> getCityWiseHotels(SearchHotelCriteria searchhotel) throws DatabaseException {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<Hotel> hotelList = new ArrayList<>();

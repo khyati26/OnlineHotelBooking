@@ -14,19 +14,19 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ListBookingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	public static List<Booking> bookingList=null;
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		bookingList = BookingDAO.showallbooking();
+
+	public static List<Booking> bookingList = null;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		IBookingDAO bookingDAO = new BookingDAOMySQL();
+
+		bookingList = bookingDAO.showallbooking();
 		request.setAttribute("bookingdata", bookingList);
-		System.out.println(SortingColumnOrder.columnOrder);
 		request.setAttribute("ColumnOrder", SortingColumnOrder.columnOrder);
-		RequestDispatcher rd=request.getRequestDispatcher("admin/booking/ShowAllBooking.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("admin/booking/ShowAllBooking.jsp");
 		rd.forward(request, response);
-	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
 	}
 
 }

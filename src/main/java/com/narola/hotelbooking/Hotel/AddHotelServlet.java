@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import com.narola.hotelbooking.Room.IRoomDAO;
-import com.narola.hotelbooking.Room.Room;
-import com.narola.hotelbooking.Room.RoomDAOMySQL;
+import com.narola.hotelbooking.Room.dao.IRoomDAO;
+import com.narola.hotelbooking.Room.dao.RoomDAOMySQL;
+import com.narola.hotelbooking.Room.model.Room;
 import com.narola.hotelbooking.Utility.AdminURLConstant;
 import com.narola.hotelbooking.Utility.Constant;
 import com.narola.hotelbooking.Utility.DAOFactory;
@@ -31,9 +31,9 @@ public class AddHotelServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		IRoomDAO roomDAO = DAOFactory.getInstance().getRoomDAO();
 
+		IRoomDAO roomDAO = DAOFactory.getInstance().getRoomDAO();
+		IHotelDAO HotelDAO = new HotelDAO();
 		Hotel hotel = new Hotel();
 		hotel.setName(request.getParameter("name"));
 		hotel.setCityId(Integer.parseInt(request.getParameter("cityid")));

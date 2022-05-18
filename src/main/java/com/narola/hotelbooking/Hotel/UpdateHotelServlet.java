@@ -21,12 +21,10 @@ import com.narola.hotelbooking.Utility.AdminURLConstant;
 public class UpdateHotelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		IHotelDAO HotelDAO = new HotelDAO();
 		String[] hoursarray = request.getParameterValues("hours");
 		String[] refundarray = request.getParameterValues("refund");
 		String[] cancleidarray = request.getParameterValues("cancelid");

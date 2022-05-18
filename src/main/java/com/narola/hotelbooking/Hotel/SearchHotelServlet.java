@@ -32,7 +32,7 @@ public class SearchHotelServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		response.setContentType("text/html");
 		
-		SearchHotel searchhotel=new SearchHotel();
+		SearchHotelCriteria searchhotel=new SearchHotelCriteria();
 		searchhotel.setCity(request.getParameter("city"));
 		searchhotel.setCheckIn(request.getParameter("check-in"));
 		searchhotel.setCheckOut(request.getParameter("check-out"));

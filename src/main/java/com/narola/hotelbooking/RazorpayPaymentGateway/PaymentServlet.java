@@ -25,9 +25,10 @@ import org.apache.hc.core5.http.io.entity.StringEntity;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.*;
 import com.narola.hotelbooking.Booking.Booking;
-import com.narola.hotelbooking.Booking.BookingDAO;
+import com.narola.hotelbooking.Booking.BookingDAOMySQL;
+import com.narola.hotelbooking.Booking.IBookingDAO;
 import com.narola.hotelbooking.Customer.Customer;
-import com.narola.hotelbooking.Hotel.SearchHotel;
+import com.narola.hotelbooking.Hotel.SearchHotelCriteria;
 import com.narola.hotelbooking.Utility.Employee;
 
 /**
@@ -39,7 +40,8 @@ public class PaymentServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-				
+		IBookingDAO bookingDAO = new BookingDAOMySQL();
+		
 		HttpSession session = request.getSession(true);
 //		Customer customer = (Customer) session.getAttribute("user");
 //		SearchHotel searchdetails = (SearchHotel) session.getAttribute("searchdetails");
@@ -81,7 +83,7 @@ public class PaymentServlet extends HttpServlet {
 				else {
 					booking.setPaymentStatus("inprogress");
 					booking.setPaymentMode("online");
-					BookingDAO.updateData(booking);
+					bookingDAO.updateData(booking);
 					session.setAttribute("booking", booking);
 					request.setAttribute("orderid", responcemap.get("id"));
 					request.getRequestDispatcher("/customerside/Razorpayform.jsp").forward(request, response);

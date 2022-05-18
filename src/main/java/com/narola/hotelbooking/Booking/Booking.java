@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.narola.hotelbooking.Customer.Customer;
 import com.narola.hotelbooking.Hotel.Hotel;
-import com.narola.hotelbooking.Room.Room;
+import com.narola.hotelbooking.Room.model.Room;
 
 public class Booking implements Comparator {
 

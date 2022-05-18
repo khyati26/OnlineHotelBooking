@@ -1,8 +1,8 @@
 package com.narola.hotelbooking.Utility;
 
-import com.narola.hotelbooking.Room.IRoomDAO;
-import com.narola.hotelbooking.Room.RoomDAOMySQL;
-import com.narola.hotelbooking.Room.RoomDAOPostgres;
+import com.narola.hotelbooking.Room.dao.IRoomDAO;
+import com.narola.hotelbooking.Room.dao.RoomDAOMySQL;
+import com.narola.hotelbooking.Room.dao.RoomDAOPostgres;
 
 public class DAOFactory {
 
@@ -18,7 +18,7 @@ public class DAOFactory {
 		}
 		return DAO_HELPER;
 	}
-
+	
 	public IRoomDAO getRoomDAO() {
 		return roomDAO;
 	}

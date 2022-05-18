@@ -17,6 +17,8 @@ public class SearchBookingServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		IBookingDAO bookingDAO = new BookingDAOMySQL();
+		
 		System.out.println(request.getParameter("checkin") + " "+request.getParameter("checkout"));
 		System.out.println(request.getParameter("bookingstatus") + " "+request.getParameter("paymentstatus"));
 		
@@ -40,8 +42,8 @@ public class SearchBookingServlet extends HttpServlet {
 				filterParam.setPaymentStatus(request.getParameter("paymentstatus"));
 			}
 		}
-		List<Booking> books=BookingDAO.searchBookingData(filterParam);
-		request.setAttribute("bookingdata", BookingDAO.searchBookingData(filterParam));
+		List<Booking> books=bookingDAO.searchBookingData(filterParam);
+		request.setAttribute("bookingdata", bookingDAO.searchBookingData(filterParam));
 
 		RequestDispatcher rd=request.getRequestDispatcher("admin/booking/ShowAllBooking.jsp");
 		rd.forward(request, response);

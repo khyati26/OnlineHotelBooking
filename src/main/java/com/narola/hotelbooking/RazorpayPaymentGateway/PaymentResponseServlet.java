@@ -14,7 +14,8 @@ import javax.servlet.http.HttpSession;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.narola.hotelbooking.Authentication.UserDAO;
 import com.narola.hotelbooking.Booking.Booking;
-import com.narola.hotelbooking.Booking.BookingDAO;
+import com.narola.hotelbooking.Booking.BookingDAOMySQL;
+import com.narola.hotelbooking.Booking.IBookingDAO;
 import com.narola.hotelbooking.Customer.CustomerDAO;
 import com.narola.hotelbooking.Utility.StatusConstants;
 
@@ -26,8 +27,10 @@ public class PaymentResponseServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		IBookingDAO bookingDAO = new BookingDAOMySQL();
+		
 		int bookingid = Integer.parseInt(request.getParameter("bookingid"));
-		Booking booking = BookingDAO.viewBooking(bookingid);
+		Booking booking = bookingDAO.viewBooking(bookingid);
 		
 		HttpSession  session = request.getSession(true);
 		session.setAttribute("user", CustomerDAO.getUserDataById(booking.getCustomerId()));
@@ -42,7 +45,7 @@ public class PaymentResponseServlet extends HttpServlet {
 			ObjectMapper mapper = new ObjectMapper();				
 			String jsonstr=mapper.writeValueAsString(map);
 			booking.setErrorJson(jsonstr);
-			BookingDAO.updateData(booking); 
+			bookingDAO.updateData(booking); 
 			RequestDispatcher rd= request.getRequestDispatcher("/customerside/paymentfail.jsp");
 			rd.forward(request, response);			
 		}
@@ -55,7 +58,7 @@ public class PaymentResponseServlet extends HttpServlet {
 			booking.setRazorPaymentId(request.getParameter("razorpay_payment_id"));		
 			booking.setFailedReason("");
 			booking.setErrorJson("");
-			BookingDAO.updateData(booking); 
+			bookingDAO.updateData(booking); 
 			RequestDispatcher rd= request.getRequestDispatcher("/customerside/paymentsuccess.jsp");
 			rd.forward(request, response);
 		
@@ -66,7 +69,7 @@ public class PaymentResponseServlet extends HttpServlet {
 			booking.setBookingStatus(StatusConstants.BOOKING_NOT_CONFIRM);
 			booking.setFailedReason("This payment is Cancled by user");
 			booking.setErrorJson("");
-			BookingDAO.updateData(booking); 
+			bookingDAO.updateData(booking); 
 			RequestDispatcher rd= request.getRequestDispatcher("/customerside/paymentfail.jsp");
 			rd.forward(request, response);			
 			

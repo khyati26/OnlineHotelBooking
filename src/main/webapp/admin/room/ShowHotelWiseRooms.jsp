@@ -5,7 +5,7 @@
 <%@page import="com.narola.hotelbooking.Hotel.Hotel"%>
 <%@ page import="java.util.List"%>
 
-<%@page import="com.narola.hotelbooking.Room.Room"%>
+<%@page import="com.narola.hotelbooking.Room.model.Room"%>
 
 <!DOCTYPE html>
 <html lang="en">

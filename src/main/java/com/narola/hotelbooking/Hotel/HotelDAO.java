@@ -10,9 +10,10 @@ import java.util.List;
 import com.narola.hotelbooking.Exception.DatabaseException;
 import com.narola.hotelbooking.Utility.ConnectDB;
 
-public class HotelDAO {	
+public class HotelDAO implements IHotelDAO{	
 
-	public static int inserData(Hotel hotel) throws DatabaseException {
+	@Override
+	public int inserData(Hotel hotel) throws DatabaseException {
 		PreparedStatement ps = null;
 		try {
 			String query = "INSERT INTO "
@@ -43,7 +44,8 @@ public class HotelDAO {
 		return 0;
 	}
 
-	public static void updateData(Hotel hotel) throws DatabaseException {
+	@Override
+	public void updateData(Hotel hotel) throws DatabaseException {
 		PreparedStatement ps = null;
 		String query = "update hotels set "
 				+ "name = ?,image = ?,stateid = ?,cityid = ?,address = ?,rating = ?,amenitiesAndservices = ?,emailid = ?,cancellationpolicy = ? "
@@ -69,7 +71,8 @@ public class HotelDAO {
 		}
 	}
 
-	public static void deleteHotel(int id) throws DatabaseException {
+	@Override
+	public void deleteHotel(int id) throws DatabaseException {
 		PreparedStatement ps = null;
 		try {
 			ps = ConnectDB.getInstance().getConnection().prepareStatement("update hotels set softdelete = 1 where id = ? " );
@@ -83,7 +86,8 @@ public class HotelDAO {
 		}		
 	}
 
-	public static Hotel viewHotel(int id) throws DatabaseException {
+	@Override
+	public Hotel viewHotel(int id) throws DatabaseException {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
@@ -119,7 +123,8 @@ public class HotelDAO {
 		}
 	}
 
-	public static List<Hotel> showData() throws DatabaseException {
+	@Override
+	public List<Hotel> showData() throws DatabaseException {
 		List<Hotel> hotelList = new ArrayList<>();
 		Statement st=null;
 		ResultSet rs=null;
@@ -154,7 +159,8 @@ public class HotelDAO {
 		}
 	}
 
-	public static List<Hotel> getHotelNameandId() throws DatabaseException {
+	@Override
+	public List<Hotel> getHotelNameandId() throws DatabaseException {
 		List<Hotel> hotelList = new ArrayList<>();
 		Statement st=null;
 		ResultSet rs=null;

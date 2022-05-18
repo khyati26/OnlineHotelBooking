@@ -16,11 +16,12 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.narola.hotelbooking.Hotel.HotelDAO;
-import com.narola.hotelbooking.Hotel.SearchHotel;
-import com.narola.hotelbooking.Room.IRoomDAO;
-import com.narola.hotelbooking.Room.Room;
-import com.narola.hotelbooking.Room.RoomDAOMySQL;
-import com.narola.hotelbooking.Room.RoomDAOPostgres;
+import com.narola.hotelbooking.Hotel.IHotelDAO;
+import com.narola.hotelbooking.Hotel.SearchHotelCriteria;
+import com.narola.hotelbooking.Room.dao.IRoomDAO;
+import com.narola.hotelbooking.Room.dao.RoomDAOMySQL;
+import com.narola.hotelbooking.Room.dao.RoomDAOPostgres;
+import com.narola.hotelbooking.Room.model.Room;
 import com.narola.hotelbooking.Utility.DAOFactory;
 
 /**
@@ -28,38 +29,30 @@ import com.narola.hotelbooking.Utility.DAOFactory;
  */
 public class BookingDetailsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		IRoomDAO roomDAO = DAOFactory.getInstance().getRoomDAO();
-	
+		IHotelDAO HotelDAO = new HotelDAO();
+
 		HttpSession session = request.getSession();
-			
-//		System.out.println((String)request.getParameter("roomid") + " "+request.getParameter("totprice2") );
-		Gson g = new Gson();  
-		HashMap<Double,String> s = g.fromJson((String)request.getParameter("roomid"), HashMap.class);  
+		Gson g = new Gson();
+		HashMap<Double, String> s = g.fromJson((String) request.getParameter("roomid"), HashMap.class);
 		List<Room> roomList = new ArrayList<>();
-		
-		for(Entry<Double, String> pair : s.entrySet()) {
+
+		for (Entry<Double, String> pair : s.entrySet()) {
 			Room room = roomDAO.viewRoom(pair.getKey().intValue());
 			room.setAvailableroom(Integer.parseInt(pair.getValue()));
-			roomList.add(room);			
-//			System.out.println(pair.getKey() + "  "+ pair.getValue());			
+			roomList.add(room);
 		}
-		
+
 		request.setAttribute("hotel", HotelDAO.viewHotel(Integer.parseInt(request.getParameter("hotelid"))));
 		request.setAttribute("totalprice", request.getParameter("totprice2"));
 		request.setAttribute("roomlist", roomList);
-		
+
 		session.setAttribute("roomlist", roomList);
-		RequestDispatcher rd= request.getRequestDispatcher("customerside/Bookingpage.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("customerside/Bookingpage.jsp");
 		rd.forward(request, response);
 	}
 

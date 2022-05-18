@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.narola.hotelbooking.Customer.Customer;
-import com.narola.hotelbooking.Hotel.SearchHotel;
+import com.narola.hotelbooking.Hotel.SearchHotelCriteria;
 import com.narola.hotelbooking.RazorpayPaymentGateway.PaymentGatway;
-import com.narola.hotelbooking.Room.Room;
+import com.narola.hotelbooking.Room.model.Room;
 import com.narola.hotelbooking.Utility.ConnectDB;
 import com.narola.hotelbooking.Utility.StatusConstants;
 import com.narola.hotelbooking.Utility.UserURLConstant;
@@ -28,11 +28,13 @@ public class InsertBookingEntryServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		IBookingDAO bookingDAO = new BookingDAOMySQL();
+		
 		HttpSession session = request.getSession(true);
 
 		Customer customer = (Customer) session.getAttribute("user");
-		SearchHotel searchdetails = (SearchHotel) session.getAttribute("searchdetails");
+		SearchHotelCriteria searchdetails = (SearchHotelCriteria) session.getAttribute("searchdetails");
 		List<Room> roomlist = (List<Room>) session.getAttribute("roomlist");
 		
 		Booking booking = new Booking();
@@ -52,7 +54,7 @@ public class InsertBookingEntryServlet extends HttpServlet {
 		}
 		booking.setTotalRoomQty(totalroomqty);
 
-		int bookingid = BookingDAO.createBooking(booking,roomlist);
+		int bookingid = bookingDAO.createBooking(booking,roomlist);
 		booking.setId(bookingid);
 		
 		if(PaymentGatway.createOrder(booking) == 200) {
@@ -64,7 +66,5 @@ public class InsertBookingEntryServlet extends HttpServlet {
 			System.out.println("error");
 		}
 		
-		
-//		response.sendRedirect(request.getContextPath() + UserURLConstant.PAYMENT_URL);
 	}
 }

@@ -39,7 +39,7 @@ public class HotelServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		IHotelDAO HotelDAO = new HotelDAO();
 		if (request.getRequestURI().equals(request.getContextPath() + AdminURLConstant.DISPLAYALL_HOTELS_URL)) {
 			try {
 				List<Hotel> hotels = HotelDAO.showData();
@@ -106,11 +106,6 @@ public class HotelServlet extends HttpServlet {
 			rd.forward(request, response);
 
 		}
-		/*
-		 * else { List<Hotel> h2 = HotelDAO.showdata(); request.setAttribute("hotels",
-		 * h2); RequestDispatcher rd = request.getRequestDispatcher("ListHotels.jsp");
-		 * rd.forward(request, response); }
-		 */
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

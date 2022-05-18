@@ -1,7 +1,7 @@
 <%@page import="org.apache.jasper.tagplugins.jstl.core.Import"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@page import="com.narola.hotelbooking.Room.Room"%>
+<%@page import="com.narola.hotelbooking.Room.model.Room"%>
 <%@page import="com.narola.hotelbooking.Hotel.Hotel"%>
 <%@ page import="java.io.File" %>
 <%@page import="com.narola.hotelbooking.Utility.Constant"%>

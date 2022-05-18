@@ -15,7 +15,8 @@ import org.apache.hc.core5.http.io.entity.StringEntity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.narola.hotelbooking.Booking.Booking;
-import com.narola.hotelbooking.Booking.BookingDAO;
+import com.narola.hotelbooking.Booking.BookingDAOMySQL;
+import com.narola.hotelbooking.Booking.IBookingDAO;
 import com.narola.hotelbooking.Utility.StatusConstants;
 
 public class PaymentGatway {
@@ -25,6 +26,9 @@ public class PaymentGatway {
 	public static final String KEY_SECRET = "bfDdcirvf4jZWEcvIaAfvmn8";
 	
 	public static int createOrder(Booking booking) throws IOException {
+		
+		IBookingDAO bookingDAO = new BookingDAOMySQL();
+		
 		ObjectMapper mapper = new ObjectMapper();
 		
 		try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
@@ -66,7 +70,7 @@ public class PaymentGatway {
 					booking.setPaymentStatus(StatusConstants.PAYMENT_IN_PROGRESS);
 					booking.setPaymentMode(StatusConstants.PAYMENT_MODE_ONLINE);
 					booking.setRazorOrderId(responcemap.get("id"));
-					BookingDAO.updateData(booking);
+					bookingDAO.updateData(booking);
 //					session.setAttribute("booking", booking);
 //					request.setAttribute("orderid", responcemap.get("id"));
 //					request.getRequestDispatcher("/customerside/Razorpayform.jsp").forward(request, response);

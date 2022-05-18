@@ -36,7 +36,7 @@
  
   <context-param>
     <param-name>DB-IN-USE</param-name>
-    <param-value>ORACLE</param-value>
+    <param-value>MYSQL</param-value>
   </context-param>
   
   <context-param>
@@ -57,7 +57,7 @@
     <description></description>
     <display-name>RoomValidationFilter</display-name>
     <filter-name>RoomValidationFilter</filter-name>
-    <filter-class>com.narola.hotelbooking.Room.RoomValidationFilter</filter-class>
+    <filter-class>com.narola.hotelbooking.Room.validation.RoomValidationFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>RoomValidationFilter</filter-name>
@@ -145,7 +145,7 @@
     <description></description>
     <display-name>AddRoomServlet</display-name>
     <servlet-name>AddRoomServlet</servlet-name>
-    <servlet-class>com.narola.hotelbooking.Room.AddRoomServlet</servlet-class>
+    <servlet-class>com.narola.hotelbooking.Room.Controller.AddRoomServlet</servlet-class>
     <multipart-config>
       <max-file-size>104448</max-file-size>
       <max-request-size>26214400</max-request-size>
@@ -160,7 +160,7 @@
     <description></description>
     <display-name>ListRoomServlet</display-name>
     <servlet-name>ListRoomServlet</servlet-name>
-    <servlet-class>com.narola.hotelbooking.Room.ListRoomServlet</servlet-class>
+    <servlet-class>com.narola.hotelbooking.Room.Controller.ListRoomServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ListRoomServlet</servlet-name>
@@ -170,7 +170,7 @@
     <description></description>
     <display-name>ListRoomServlet</display-name>
     <servlet-name>ListRoomServlet</servlet-name>
-    <servlet-class>com.narola.hotelbooking.Room.ListRoomServlet</servlet-class>
+    <servlet-class>com.narola.hotelbooking.Room.Controller.ListRoomServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ListRoomServlet</servlet-name>
@@ -184,7 +184,7 @@
     <description></description>
     <display-name>DeleteRoomServlet</display-name>
     <servlet-name>DeleteRoomServlet</servlet-name>
-    <servlet-class>com.narola.hotelbooking.Room.DeleteRoomServlet</servlet-class>
+    <servlet-class>com.narola.hotelbooking.Room.Controller.DeleteRoomServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DeleteRoomServlet</servlet-name>
@@ -194,7 +194,7 @@
     <description></description>
     <display-name>UpdateRoomServlet</display-name>
     <servlet-name>UpdateRoomServlet</servlet-name>
-    <servlet-class>com.narola.hotelbooking.Room.UpdateRoomServlet</servlet-class>
+    <servlet-class>com.narola.hotelbooking.Room.Controller.UpdateRoomServlet</servlet-class>
     <multipart-config>
       <max-file-size>104448</max-file-size>
       <max-request-size>26214400</max-request-size>
@@ -381,7 +381,7 @@
     <description></description>
     <display-name>AvailableRoomServlet</display-name>
     <servlet-name>AvailableRoomServlet</servlet-name>
-    <servlet-class>com.narola.hotelbooking.Room.AvailableRoomServlet</servlet-class>
+    <servlet-class>com.narola.hotelbooking.Room.Controller.AvailableRoomServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AvailableRoomServlet</servlet-name>
