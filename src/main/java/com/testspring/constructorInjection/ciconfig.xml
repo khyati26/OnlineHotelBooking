@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:c="http://www.springframework.org/schema/c"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd">
+ 
+ <bean class="com.testspring.ci.addition" name="add"> <!-- c:a="45" c:b="89" /> -->
+ 	<constructor-arg value="20" type="double" />
+ 	<constructor-arg value="30" type="double"  />
+ </bean>
+ 	
+ 
+ <bean class="com.testspring.ci.Certi" name="certi" c:name="this is certificate class property" />
+ 	<!-- <constructor-arg value="Certificate class"/>
+ </bean> -->
+ <bean class="com.testspring.ci.person" name="person">
+ 	<constructor-arg value="445"/> 	
+ 	<constructor-arg value="kdb"/>
+ 	<constructor-arg ref="certi" />
+ 		<!-- <value>kdb</value>
+ 	</constructor-arg> -->
+ </bean>
+ 
+ </beans>

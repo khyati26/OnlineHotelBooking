@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:c="http://www.springframework.org/schema/c"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd">
+ 
+ 
+ 
+<!--  <bean class="com.testspring.beanlifecycle.testbean" name="bean11" p:price="5.5" init-method="init"
+ destroy-method="destroy" /> 
+ 
+  <bean class="com.testspring.beanlifecycle.testbean2" name="bean2" p:price="222.5"  />  -->
+  
+  <bean class="com.testspring.beanlifecycle.testbean3" name="bean3" p:price="108.0052 "  /> 
+ 
+ </beans>

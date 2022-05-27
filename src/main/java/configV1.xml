@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+    	<property name="locations" value="classpath:com/testspring/v1/jdbc.properties"/>
+	</bean>
+
+	<bean id="bookBean" class="com.testspring.v1.Book" init-method="init" destroy-method="customDestroy">
+
+		<constructor-arg index="1" type="java.lang.String"
+			value="${jdbc.url}" />
+		<constructor-arg index="0" type="java.lang.String"
+			value="${jdbc.username}" />
+		<constructor-arg name="pubshlisher" value="publisher" />
+
+	</bean>
+	
+	<bean id="bookBeanV1" class="com.testspring.v1.BookV1"/>
+	
+	<bean class="com.testspring.v1.BeanPostProcessorImpl"/>
+	<bean class="com.testspring.v1.BeanPostProcessorImpl2"/>
+	
+
+<!-- 	<bean id="order" class="com.testspring.v1.Order">
+
+		<constructor-arg ref="bookBean" />
+		<property name="orderId" value="1" />
+		<property name="qty" value="120" />
+
+	</bean>
+
+	<bean id="collections" class="com.testspring.v1.JavaCollection">
+
+		<property name="book">
+			<bean class="com.testspring.v1.Book"> this is the inner bean
+				<property name="publisher" value="Fiona Apple" />
+				<property name="bookName" value="25ASDF" />
+			</bean>
+		</property>
+		<property name="addressList">
+			<list>
+				<value>INDIA</value>
+				<value>USA</value>
+				<value>UK</value>
+				<value>CANADA</value>
+			</list>
+		</property>
+		<property name="addressSet">
+			<set>
+				<value>GUJARAT</value>
+				<value>UP</value>
+				<value>MP</value>
+				<value>UP</value>
+
+			</set>
+		</property>
+		<property name="addressMap">
+			<map>
+				<entry key="1" value="HELLO" />
+				<entry key="2" value="HI" />
+				<entry key="dsfs" value="HEY" />
+			</map>
+		</property>
+		<property name="addressProp">
+			<props>
+				<prop key="one">INDIA</prop>
+				<prop key="one">INDIA</prop>
+				<prop key="two">Pakistan</prop>
+				<prop key="three">USA</prop>
+				<prop key="four">USA</prop>
+			</props>
+		</property>
+
+	</bean>
+
+	<bean id="serviceLocator"
+		class="com.testspring.v1.DefaultServiceLocator" />
+	<bean id="clientService" factory-bean="serviceLocator"
+		factory-method="createClientServiceInstance" />
+	<bean id="accountService" factory-bean="serviceLocator"
+		factory-method="createAccountServiceInstance" /> -->
+		
+		
+</beans>
