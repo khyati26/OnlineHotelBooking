@@ -1,18 +1,23 @@
 package com.testspring.v2;
 
+import javax.inject.Inject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("order")
 public class Order {
 
 	private int orderId;
+
 	private Book book;
+
 	private int qty;
 
 	@Autowired
-	public Order(@Qualifier("book2") Book book) {
+	public Order(@Qualifier("book4") Book book) {
+		book.setBookName("Qualifier chnaged..." + book.getBeanName());
 		this.book = book;
 	}
 

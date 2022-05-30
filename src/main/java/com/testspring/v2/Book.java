@@ -1,28 +1,35 @@
 package com.testspring.v2;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("book")
 public class Book implements InitializingBean, DisposableBean, ApplicationContextAware, BeanNameAware {
 
+	private String beanName;
 	private String bookName;
 	private String bookAuthor;
 	private String publisher;
 	private double price;
 
+	@Autowired
 	private ApplicationContext applicationContext;
 
+	@PostConstruct
 	public void init() {
 		System.out.println("Book:Custome init...");
 	}
 
+	@PreDestroy
 	public void customDestroy() {
 		System.out.println("Book:Custome destory...");
 	}
@@ -71,6 +78,10 @@ public class Book implements InitializingBean, DisposableBean, ApplicationContex
 		this.publisher = publisher;
 	}
 
+	public String getBeanName() {
+		return beanName;
+	}
+
 	public void afterPropertiesSet() throws Exception {
 		System.out.println("Book:In afterPropertiesSet...");
 	}
@@ -85,6 +96,8 @@ public class Book implements InitializingBean, DisposableBean, ApplicationContex
 	}
 
 	public void setBeanName(String name) {
+		this.beanName = name;
 		System.out.println("Book:Bean name " + name + "...");
 	}
+
 }
