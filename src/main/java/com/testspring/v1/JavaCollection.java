@@ -11,10 +11,6 @@ public class JavaCollection {
 	
 	private Book book;
 	
-	
-	
-	
-	
 	public Book getBook() {
 		return book;
 	}

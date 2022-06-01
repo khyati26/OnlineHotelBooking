@@ -8,11 +8,11 @@ import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.stereotype.Component;
+import org.springframework.core.env.Environment;
 
-@Component("book")
 public class Book implements InitializingBean, DisposableBean, ApplicationContextAware, BeanNameAware {
 
 	private String beanName;
@@ -20,6 +20,9 @@ public class Book implements InitializingBean, DisposableBean, ApplicationContex
 	private String bookAuthor;
 	private String publisher;
 	private double price;
+
+	@Autowired
+	private Environment environment;
 
 	@Autowired
 	private ApplicationContext applicationContext;
@@ -98,6 +101,20 @@ public class Book implements InitializingBean, DisposableBean, ApplicationContex
 	public void setBeanName(String name) {
 		this.beanName = name;
 		System.out.println("Book:Bean name " + name + "...");
+	}
+
+	@Override
+	public String toString() {
+		return "Book [beanName=" + beanName + ", bookName=" + bookName + ", bookAuthor=" + bookAuthor + ", publisher="
+				+ publisher + ", price=" + price + "]";
+	}
+
+	public Environment getEnvironment() {
+		return environment;
+	}
+
+	public void setEnvironment(Environment environment) {
+		this.environment = environment;
 	}
 
 }

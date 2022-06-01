@@ -1,24 +1,18 @@
-package com.testspring.v2;
-
-import javax.inject.Inject;
+package com.testspring;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+@Component
 public class Order {
 
 	private int orderId;
 
+//	@Autowired
 	private Book book;
 
 	private int qty;
-
-	@Autowired
-	public Order(@Qualifier("book4") Book book) {
-		book.setBookName("Qualifier chnaged..." + book.getBeanName());
-		this.book = book;
-	}
 
 	public int getOrderId() {
 		return orderId;
@@ -32,7 +26,8 @@ public class Order {
 		return book;
 	}
 
-	public void setBook(Book book) {
+	@Autowired
+	public void setBook( @Qualifier("main1")Book book) {
 		this.book = book;
 	}
 
@@ -44,4 +39,5 @@ public class Order {
 		this.qty = qty;
 	}
 
+	
 }

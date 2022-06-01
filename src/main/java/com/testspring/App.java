@@ -1,6 +1,8 @@
 package com.testspring;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -11,13 +13,20 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+//        AbstractApplicationContext context= new ClassPathXmlApplicationContext("com/testspring/config.xml");
+//        Book book = context.getBean(Book.class);    	
+//        System.out.println(book.getBookName());
+//        
+//        Order order = context.getBean(Order.class);
+//        System.out.println(order.getBook().getBookAuthor() + "<br>");
         
-        ApplicationContext context= new ClassPathXmlApplicationContext("config.xml");
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
         
-        studentBean stud=(studentBean) context.getBean("student1");
-	    System.out.println(stud);
-	    studentBean stud2=(studentBean) context.getBean("student2");
-	    System.out.println(stud2);
+        Book book2 = applicationContext.getBean(Book.class);
+        System.out.println(book2.getBookName());
+        System.out.println(book2.getBookAuthor() + " bean name: "+book2.getBeanName());
+        
+        Order order2 = applicationContext.getBean(Order.class);
+        System.out.println(order2.getBook().getBookAuthor()+ " bean name: "+order2.getBook().getBeanName());
     }
 }
