@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+<!--    <context:annotation-config/>-->
+<!--    <context:component-scan base-package="com.testspring.mypractice"/>-->
+<!--    <bean class="com.testspring.mypractice.Apple" name="apple" init-method="init" destroy-method="cleanup">-->
+<!--        <property name="colour" value="red"/>-->
+<!--        <property name="price" value="10"/>-->
+<!--    </bean>-->
+
+<!--    <bean class="com.testspring.mypractice.Order" name="order">-->
+<!--        <property name="qty" value="5"/>-->
+<!--        <property name="amount" value="50"/>-->
+<!--    </bean>-->
+
+</beans>
